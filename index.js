@@ -1,29 +1,4 @@
-// ECMAScript 6
-/*Javascript
 
-1.Hoisting: Js compiler will move variable declarations and functions to the top
-
-2.Call stack: LIFO: When we say that the call stack, operates by the data structure principle of Last In, First Out,
-it means that the last function that gets pushed into the stack is the first to be pop out, when the function returns.
-
-3.IIFE: Immediately invoking function expression
-(function() {
-    var name = 'Tan';
-}) ();
-
-
-4.Scope
-
-Global scope
-
-function scope
-
-
-5.callbacks, promises and async await*/
-
-
-//JavaScript let
-//The let statement allows you to declare a variable with block scope
 var x = 10;
 // Here x is 10
 {
