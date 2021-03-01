@@ -74,3 +74,16 @@ let j = 5;
 let k = Math.pow(j,2);
     console.log("Math.pow " + k);
 }
+
+{
+    let a = 'red';
+    let b = 'blue';
+
+    console.log('Before swap a:' + a);
+    console.log('Before swap b:' + b);
+
+    [a,b] = [b,a];
+
+    console.log('After swap a:' + a);
+    console.log('After swap b:' + b);
+}
