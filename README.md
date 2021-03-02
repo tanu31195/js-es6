@@ -3,10 +3,11 @@
 Javascript > Programming Language
 ECMAScript > Specification
 
-Dynamically typed (not type safe)
+Dynamically typed (not type safe)  
+Garbage collection done automatically
 
-JavaScript Engines
-FireFox: SpiderMonkey
+JavaScript Engines  
+FireFox: SpiderMonkey  
 Google : v8(Used in node)
 
 ## Variables
@@ -23,13 +24,20 @@ Use const if you don't want to reassign a variable
 
 ### Primitive/Value Types
 
-String
-Number
-Boolean
-undefined
-null (Used to explicitly clear the value of a variable)
+- String
+- Number
+- Boolean
+- undefined
+- null (Used to explicitly clear the value of a variable)
+- Symbol (new in ES6)
 
-### Objects
+### Reference Types
+
+- Object
+- Function
+- Array
+
+#### Objects
 
 let person = {
     name: 'Tanushka',
@@ -46,7 +54,7 @@ This is best used for dynamic assignment on run time
 `let selection = 'name';`
 `person[selection] = 'T';`
 
-### Arrays
+#### Arrays
 
 Array is an object
 Array is a data structure that is used to represent a list of items
@@ -58,7 +66,7 @@ Can be any type(Elements doesn't need to be the same type)
 
 `console.log(colors[1])`
 
-## Functions
+#### Functions
 
     function greet(name) { // name is the Parameter of the function
         console.log('Hello World' + name);
@@ -66,7 +74,7 @@ Can be any type(Elements doesn't need to be the same type)
 
 `greet('Tanu');` // Argument is passed
 
-### Types of functions
+##### Types of functions
 
 - Performs a task
 - Calculates a value and return it
@@ -181,7 +189,120 @@ Iterate over properties of an object or elements in an array
 `break;` terminates the current loop/ jump out of a loop
 `continue;` terminates execution of the statements in the current iteration and jump to the next iteration of the loop
 
---
+## Objects
+
+- Purpose of an object is to group related variables and functions  
+- A function that is a part of an object is called a method  
+- Objects are dynamic, we can add or delete new properties and methods  
+- const objects cannot be reassigned but can add/delete properties and change the object
+- Every object has a constructor(it references to the function that was used to create the object)
+- Functions are objects
+- Objects are not iterable
+
+### Factory functions
+
+- Produce object instances without diving into the complexities of classes, and the new keyword  
+- It simply returns an object
+- Camel Notation createCircle()
+- Constructor of circle1 is Object() this is an internal constructor function
+index.js:107
+
+    function createCircle(radius) {
+        return {
+            radius,
+            draw() {
+                console.log('Draw');
+            }
+        }
+    }
+    const circle1 = createCircle(1);
+
+### Constructor functions
+
+Pascal notation Circle()  
+Under the hood the new keyword will,
+- create an empty object
+- set this to point to the empty object
+- return the object
+- Constructor of circle object is Circle(radius) {...}
+
+
+    function Circle(radius) {
+        this.radius = radius;
+        this.draw = function () {
+            console.log('Draw circle');
+        }
+    }
+    const circle = new Circle(1);
+    circle.draw();
+
+### Enumerating Properties of an Object
+
+We can use for...in `for (let key in object) console.log(key, object[key])` to iterate properties/methods in an object  
+We can also use for...of with `for (let key of Object.keys(obj))` which returns a keys string array []
+and `for (let entry of Object.entries(obj))` which returns each key value pair as an array
+To check if a given property is in an object `if ('radius' in circle)`
+
+### Cloning an object
+
+#### Old way
+
+    const another = {};
+    for (let key in circle)
+    another[key] = circle[key]; // another['radius'] = circle['key'];
+
+#### Object.assign 
+
+will take a target object(can be an empty object or an existing object) as the first argument 
+and will take one or more source objects.  
+This method will copy all the properties/methods of the source objects to the target object  
+Can be used to clone an object or to combine multiple objects
+
+    const another = Object.assign({}, circle); //empty object
+    const another = Object.assign({color: 'green'}, circle); //existing
+
+### Spread operator ...
+
+Spreads an object(get all properties/methods) and put them into another object
+
+    const another = { ...circle};
+
+
+
+## Value(Primitives) vs. Reference(Objects) types
+
+**Primitives** are copied by their **value**
+
+    let x = 10;
+    let y = x; // independent copy of the value
+    x = 20
+    //Output 
+    x --> 20
+    y --> 10
+---
+
+**Objects** are copied by their **reference** /address
+
+    let x = {value : 10};
+    let y = x; //copies the reference in memory like 1234
+    x.value = 20
+    //Output
+    x = {value: 20}
+    y = {value: 20}
+
+---
+
+Math: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math>  
+String: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String>  
+Javascript has String primitive and String object.  
+Javascript engine will wrap the primitive string with a String object internally, so we can use the methods
+Template Literals using back tick  
+Use multi-line strings and string interpolation
+
+Date: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date>  
+
+
+---
 
 1.Hoisting: Js compiler will move variable declarations and functions to the top
 
