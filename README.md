@@ -267,8 +267,6 @@ Spreads an object(get all properties/methods) and put them into another object
 
     const another = { ...circle};
 
-
-
 ## Value(Primitives) vs. Reference(Objects) types
 
 **Primitives** are copied by their **value**
@@ -290,6 +288,8 @@ Spreads an object(get all properties/methods) and put them into another object
     x = {value: 20}
     y = {value: 20}
 
+When checking for equality between objects reference is checked
+
 ---
 
 Math: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math>  
@@ -298,9 +298,173 @@ Javascript has String primitive and String object.
 Javascript engine will wrap the primitive string with a String object internally, so we can use the methods
 Template Literals using back tick  
 Use multi-line strings and string interpolation
+Date: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date>
 
-Date: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date>  
+---
 
+## Arrays
+
+### Adding elements
+
+    const numbers = [3,4]; //[3,4]
+    
+    //End
+    numbers.push(5,6); // [3,4,5,6]
+
+    //Beginning
+    numbers.unshift(1,2); // [1,2,3,4,5,6]
+
+    //Middle (start position, delete count, new items)
+    numbers.splice(2, 0, 'a', 'b'); // [1, 2, "a", "b", 3, 4, 5, 6]
+
+### Removing Elements
+
+    const numbers = [1,2,3,4,5,6]; //[1,2,3,4,5,6]
+    //End
+    const last = numbers.pop(); // numbers:[1,2,3,4,5] last: 6
+
+    //Beginning
+    const first = numbers.shift(); // numbers:[2,3,4,5] first: 1
+
+    //Middle (start position, delete count, new items)
+    numbers.splice(2, 2); // [2, 3]
+
+### Emptying an array
+
+    let numbers = [1, 2, 3, 4, 5, 6];
+    let another = numbers;
+
+    //Solution 1: Will not work if there are multiple references. numbers will be pointing to a new array
+    numbers = [];
+
+    //Solution 2: Best solution
+    numbers.length = 0;
+
+    //Solution 3
+    numbers.splice(0, numbers.length);
+
+    //Solution 4: Have performance impact
+    while (numbers.length > 0)
+        numbers.pop();
+
+### Combining, copying and slicing arrays
+
+    let one = [1, 2, 3];
+    let two = [4, 5, 6];
+
+    //Combine
+    let combined = one.concat(two); // [1, 2, 3, 4, 5, 6]
+    const combined2 = [...one, ...two]; //Using the spread operator
+
+    //Copy
+    const copy = [...combined];
+    let copy1 = combined.slice(); //[1, 2, 3, 4, 5, 6]
+
+    //Slice
+    let sliced1 = combined.slice(2); //[3, 4, 5, 6]
+    let sliced2 = combined.slice(2,4); //[3, 4]
+
+If the values are primitive they will be copied by values to the output array  
+If the values are reference type(objects) the reference will be copied
+
+### Joining arrays
+
+    const joined = numbers.join(',');
+
+Can use split and join
+Default comma is used as separator
+
+### Mapping arrays
+
+    const mapped1 = filtered.map(number => {
+    return `<li>${number}</li>`;
+    });
+
+### Reducing an array
+
+- Reducing elements of an array to a single value  
+- Reduce method have 2 arguments  
+- 1st is a callback function  
+- 2nd is the initial value of the accumulator  
+- If we don't initialize the accumulator it will take the 
+  1st element as accumulator and the 
+  2nd element as currentValue
+
+
+    numbers.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue;
+    }, 0);
+
+    const reduced1 = numbers.reduce((accumulator, currentValue) => accumulator + currentValue);
+
+### Iterating an array
+
+    for (let number of numbers)
+    console.log(number);
+
+    numbers.forEach((number, index) => console.log(index, number)); //when using for each we can also get the index
+
+### Sorting arrays
+
+    numbers.sort();
+    numbers.reverse(); //reverses the order(does not sort)
+
+### Checking elements
+
+Returns a boolean, will not check all elements in an array will return if matches
+
+    numbers.every() //Checks if every element matches the given criteria
+    
+    numbers.some() //Checks if at least one element matches the given criteria
+
+
+### Finding Elements
+
+#### Primitive types
+
+    numbers.indexOf('a') // 2
+    numbers.indexOf('d') // -1
+    numbers.indexOf(4) !== -1 // true
+    numbers.includes(5) //true
+    numbers.indexOf('a', 3) // Passing search starting index from(Start search from index 3) 
+
+#### Reference types(Objects)
+
+    const course = courses.find(function (course) {
+        return course.name === 'a';
+    });
+    const course = courses.findIndex(function (course) {
+        return course.name === 'c';
+    });
+
+## Arrow functions
+
+When passing a function as a callback/predicate function, or an argument we can use arrow function syntax
+
+- Remove the function keyword and ;
+- Add the arrow => to separate the parameters of the function from it's body
+- If we only have one parameter we can remove the parenthesis also ()
+- If there are no parameters we have to pass empty parenthesis ()
+- If the function is a single line of code and is returning a value we can remove the curly braces as well {}
+- If we are returning an object `(n => {value: n})` 
+  we have to surround it using () `(n => ({value: n})` 
+  because by default {} is treated as a code block
+
+
+    const course = courses.find(function (course) {
+        return course.name === 'a';
+    });
+    //Using arrow function
+    const course = courses.find(course => course.name === 'a');
+
+### Chaining of methods
+
+A new array is returned everytime, so we can chain the methods
+
+    const filtered1 = numbers
+        .filter(number => number > 0)
+        .map(number => `<li>${number}</li>`)
+        .join(`\n`);
 
 ---
 

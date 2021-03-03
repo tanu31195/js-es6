@@ -1,3 +1,10 @@
+console.log(
+    "%cJavascript",
+    "background-color: fuchsia ; color: white ; font-weight: bold ; " +
+    "font-size: 20px ; font-style: italic ; text-decoration: underline ; " +
+    "font-family: 'american typewriter' ; text-shadow: 1px 1px 3px black ;"
+);
+
 var x = 10;
 // Here x is 10
 {
@@ -130,4 +137,209 @@ isNaN("Hello"); // returns true
 
     const circle = new Circle(1);
     circle.draw();
+}
+
+{
+    console.log('%cArrays 🚂', 'color:red;');
+    console.log('Adding elements');
+    const numbers = [3, 4]; //[3,4]
+
+    //End
+    numbers.push(5, 6); // [3,4,5,6]
+
+    //Beginning
+    numbers.unshift(1, 2); // [1,2,3,4,5,6]
+
+    //Middle (start position, delete count, new items)
+    numbers.splice(2, 0, 'a', 'b');
+
+    console.log(numbers);
+
+    console.log('Finding elements');
+    console.log(numbers.indexOf('a'));
+    console.log(numbers.indexOf('a') !== -1);
+
+    console.log(numbers.includes(15));
+    const courses = [
+        {id: 1, name: 'a'},
+        {id: 2, name: 'b'},
+        {id: 3, name: 'c'},
+    ];
+
+    console.log(courses.find(function (course) {
+        return course.name === 'a';
+    }));
+    console.log(courses.findIndex(course => {
+        return course.name === 'a';
+    }));
+}
+
+{
+    console.log('Removing elements');
+    const numbers = [1, 2, 3, 4, 5, 6]; //[1,2,3,4,5,6]
+    //End
+    const last = numbers.pop(); // numbers:[1,2,3,4,5] last: 6
+    console.log(last);
+    console.log(numbers);
+    //Beginning
+    const first = numbers.shift(); // numbers:[2,3,4,5] first: 1
+    console.log(first);
+    console.log(numbers);
+    //Middle (start position, delete count, new items)
+    numbers.splice(2, 2); // [2, 3]
+    console.log(numbers);
+}
+
+{
+    console.log('Emptying an array');
+    let numbers = [1, 2, 3, 4, 5, 6];
+    let another = numbers;
+
+    //Solution 1: Will not work if there is a reference object
+    numbers = [];
+
+    //Solution 2: Best solution
+    numbers.length = 0;
+
+    //Solution 3
+    numbers.splice(0, numbers.length);
+
+    //Solution 4: Have performance impact
+    while (numbers.length > 0)
+        numbers.pop();
+}
+
+{
+    console.log('Combining and slicing arrays');
+    let one = [1, 2, 3];
+    let two = [4, 5, 6];
+
+    let combined = one.concat(two); // [1, 2, 3, 4, 5, 6]
+    console.log(combined);
+
+    let sliced3 = combined.slice(); //[1, 2, 3, 4, 5, 6]
+    let sliced1 = combined.slice(2); //[3, 4, 5, 6]
+    let sliced2 = combined.slice(2, 4); //[3, 4]
+    console.log(sliced1, sliced2, sliced3);
+}
+
+{
+    console.log('Iterating arrays');
+    let numbers = [1, 2, 3];
+
+    for (let number of numbers)
+        console.log(number);
+
+    numbers.forEach((number, index) => console.log(index, number));
+}
+
+{
+    console.log('Joining arrays');
+    const numbers = [1, 2, 3];
+    const joined = numbers.join('#');
+
+    console.log(joined);
+}
+
+{
+    console.log('Sorting arrays');
+    const numbers = [3, 1, 2, 6, 4];
+    numbers.sort();
+
+    console.log(numbers);
+    numbers.reverse(); //reverses the order
+    console.log(numbers);
+
+    const courses = [
+        {id: 1, name: 'Node'},
+        {id: 2, name: 'javascript'},
+        {id: 3, name: 'Mongo'},
+    ];
+
+    courses.sort(function (a, b) {
+        //case sensitivity affects ordering(Uppercase are higher than lowercase in ascii table)
+        const nameA = a.name.toUpperCase();
+        const nameB = b.name.toUpperCase();
+
+        if (nameA < nameB) return -1 //a < b
+        if (nameA > nameB) return 1 //a > b
+        return 0; //a === b
+    });
+
+    console.log(courses);
+}
+
+{
+    console.log('Checking arrays');
+    const numbers = [3, -1, 2, 6, 4];
+
+    const allPositive = numbers.every(number => number >= 0);
+    console.log(allPositive);
+    const atLeastOne = numbers.some(number => number >= 0);
+    console.log(atLeastOne);
+}
+
+{
+    console.log('Filtering arrays');
+    const numbers = [3, -1, 2, 6, 4];
+
+    const filtered = numbers.filter(number => number >= 0);
+    console.log(filtered);
+
+    const courses = [
+        {id: 1, name: 'Node'},
+        {id: 2, name: 'javascript'},
+        {id: 3, name: 'Mongo'},
+    ];
+
+    const filtered1 = courses.filter(course => course.name.includes('o'));
+    console.log(filtered1);
+}
+
+{
+    console.log('Mapping arrays');
+    const numbers = [3, -1, 2, 6, 4];
+
+    const filtered = numbers.filter(number => number >= 0);
+
+    const mapped = filtered.map(number => {
+        return {value: number};
+    });
+    const mapped2 = filtered.map(number => ({value: number}));
+
+    const mapped1 = filtered.map(number => {
+        return `<li>${number}</li>`;
+    });
+
+    //Chaining
+    const filtered1 = numbers
+        .filter(number => number > 0)
+        .map(number => `<li>${number}</li>`)
+        .join(`\n`);
+
+    console.log(mapped1.join(`\n`));
+
+    console.log(mapped1);
+    console.log(filtered1);
+}
+
+{
+    console.log('Reducing arrays');
+    const numbers = [3, -1, 2];
+
+    //Reduce method have 2 arguments
+    //1st is a callback function
+    //2nd is the initial value of the accumulator
+    //a = 0 c=3 => 3
+    //a = 3 c=-1 => 2
+    //a = 2 c=2 => 4
+    const reduced = numbers.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue;
+    }, 0);
+
+    //a = 3 c=-1 => 2
+    //a = 2 c=2 => 4
+    const reduced1 = numbers.reduce((accumulator, currentValue) => accumulator + currentValue);
+
+    console.log(reduced);
 }
