@@ -329,6 +329,9 @@ Date: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_
     //Middle (start position, delete count, new items)
     numbers.splice(2, 2); // [2, 3]
 
+    //Deleted elements are returned as an array and can be fetched
+    let val = numbers.splice(1, 1)[0];
+
 ### Emptying an array
 
     let numbers = [1, 2, 3, 4, 5, 6];
@@ -422,6 +425,7 @@ Returns a boolean, will not check all elements in an array will return if matche
 
 #### Primitive types
 
+    [1, 2, "a", "b", 3, 4, 5, 6]
     numbers.indexOf('a') // 2
     numbers.indexOf('d') // -1
     numbers.indexOf(4) !== -1 // true
