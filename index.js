@@ -343,3 +343,72 @@ isNaN("Hello"); // returns true
 
     console.log(reduced);
 }
+
+{
+    console.log('Functions');
+
+    //Function Declaration (; is not required)
+    function walk() {
+        console.log('walk');
+    }
+
+    //Anonymous Function Expression
+    let run = function () {
+        console.log('run');
+    }; // When declaring a variable/constant we need to terminate it with a ;
+    let x = 1;
+
+    //Named Function Expression
+    let jog = function jogging() {
+        console.log('jog');
+    };
+
+    run();
+    let move = run; // move and run are referencing the same anonymous function (one object in memory)
+    move();
+}
+
+{
+    console.log('Arguments');
+
+    function sum(a, b) {
+        console.log(arguments);
+        return a + b;
+    }
+
+    console.log(sum(1 + 2)); //3
+    console.log(sum(1)); //NaN (1 + undefined)
+    console.log(sum(1, 2, 3, 4, 5)); //3
+
+    function total() {
+        console.log(arguments);
+        let total = 0;
+        for (let value of arguments)
+            total += value;
+        return total;
+    }
+
+    console.log(total(1, 2, 3, 4, 5));
+}
+
+{
+    console.log('Rest operator');
+
+    function sum1(...args) {
+        console.log(args);
+        return args.reduce((a, b) => a + b);
+    }
+
+    console.log(sum1(1, 2, 3, 4, 5, 10));
+}
+
+{
+    console.log('Default parameters');
+    function interest(principal, rate = 3.5, years = 5) {
+        // rate = rate || 3.5;
+        // years = years || 5;
+        return principal * rate / 100 * years;
+    }
+
+    console.log(interest(10000 ));
+}

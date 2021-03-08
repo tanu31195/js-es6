@@ -127,7 +127,7 @@ let x = 1;
 
 #### Equality
 
-- Strict Equality === (Checks if type and value are equal) Ensures that both values have same type and value
+- Strict Equality === (Checks if type and value are equal) Ensures that both values have same types and values
 `1 === 1 // true`
 `'1' === 1 // false`
 
@@ -446,7 +446,7 @@ Returns a boolean, will not check all elements in an array will return if matche
 When passing a function as a callback/predicate function, or an argument we can use arrow function syntax
 
 - Remove the function keyword and ;
-- Add the arrow => to separate the parameters of the function from it's body
+- Add the arrow => to separate the parameters of the function from its body
 - If we only have one parameter we can remove the parenthesis also ()
 - If there are no parameters we have to pass empty parenthesis ()
 - If the function is a single line of code and is returning a value we can remove the curly braces as well {}
@@ -469,6 +469,107 @@ A new array is returned everytime, so we can chain the methods
         .filter(number => number > 0)
         .map(number => `<li>${number}</li>`)
         .join(`\n`);
+
+## Functions
+
+### Function Declaration (; is not required)
+
+Can be called before it is defined (due to hoisting)
+
+    function walk() {
+        console.log('walk');
+    }
+
+### Function Expressions
+
+Declaring a variable/constant and then setting it to a function  
+Cannot be called before it is defined/initialized
+
+#### Anonymous Function Expression
+
+    let run = function () {
+        console.log('run');
+    }; // When declaring a variable/constant we need to terminate it with a ;
+    let x = 1;
+
+    run();
+    let move = run; // move and run are referencing the same anonymous function (one object in memory)
+    move();
+
+### Named Function Expression
+
+    let jog = function jogging() {
+        console.log('jog');
+    };
+
+## Hoisting <https://developer.mozilla.org/en-US/docs/Glossary/Hoisting>
+
+- Process of moving all the function declarations to the top of the file
+- JavaScript only hoists declarations, not initializations
+- If a variable is declared and initialized after using it, the value will be undefined
+- Initializations using let and const are also not hoisted
+
+
+    run(); // Throws ReferenceError exception
+    let run = function () { //initialization of run is done after
+        console.log('run');
+    };
+
+Below will work due to hoisting the function declaration
+
+    walk(); //logs walk
+    function walk() {
+        console.log('walk');
+    }
+
+## Arguments
+
+- It's an object
+- Keys of the arguments object are the indexes of the arguments passed to the function
+
+
+    function sum(a, b) {
+        console.log(arguments); //arguments object with 1, 2, 3, 4, 5
+        return a + b;
+    }
+    console.log(sum(1, 2, 3, 4, 5)); //3
+
+    function total() {
+        console.log(arguments);
+        let total = 0;
+        for (let value of arguments)
+            total += value;
+        return total;
+    }
+    console.log(total(1, 2, 3, 4, 5)); //15
+    
+## Rest operator (...)
+
+- Similar to spread operator when used with arrays to spread an array(take individual elements)
+- When (...) used with a parameter of a function it is called the rest operator
+- We can pass varying number of arguments to a function
+- The rest operator will put all the arguments to an array
+- Rest parameter should be the last parameter in a function
+
+
+    function multiply(multiplier, ...args) { //multiplier and REST of the parameters/arguments
+        console.log(args);
+        const total = args.reduce((a, b) => a + b);
+        return total * multiplier;
+    }
+    console.log(multiply(1, 2, 3, 4, 5, 10)); //25
+
+## Default Parameters
+
+If you give a parameter a default value, you have to give default values to all the parameters after that
+
+    function interest(principal, rate = 3.5, years = 5) {
+        // rate = rate || 3.5;
+        // years = years || 5;
+        return principal * rate / 100 * years;
+    }
+
+    console.log(interest(10000 ));
 
 ---
 
