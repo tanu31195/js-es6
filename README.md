@@ -571,6 +571,82 @@ If you give a parameter a default value, you have to give default values to all 
 
     console.log(interest(10000 ));
 
+## Getters and Setters
+
+- getters => access properties
+- setters => change (mutate) properties
+- By using getters we can access object methods as a property without () => Object.method
+
+
+    const person = {
+        firstName: 'Tanushka',
+        lastName: 'Bandara',
+        // fullName: function() {} // Old syntax
+        get fullName() {
+            return `Method: ${this.firstName} ${this.lastName}`;
+        },
+        set fullName(fullName) {
+            let names = fullName.split(' ');
+            this.firstName = names[0];
+            this.lastName = names[1];
+        }
+    };
+
+    person.fullName = 'T B'; //setter
+    //console.log(person.fullName()); //without getter
+    console.log(person.fullName); //with getter
+
+## Try and catch
+
+Error handling
+Try block can have one or more statements
+In the catch block we can get the thrown error object and handle it
+
+    const e = new Error(); //plain javascript object
+    throw e; //the moment we throw it, its referred to as an exception
+
+    ...
+    set fullName(fullName) {
+        if (typeof fullName != 'string')
+            throw new Error('Full name is not a string');
+        let names = fullName.split(' ');
+        if (names.length !== 2)
+            throw new Error('Enter a valid name')
+    }
+    ...
+
+    try {
+        person1.fullName = ''; //setter
+    } catch (e) {
+        console.error(e);
+    }
+
+## Local vs Global Scope
+
+- Scope of let and const is limited to the block in which they are defined
+- In functions, if statements, loops limited to the scope inside to the block
+- Global scope is when variables are defined outside(Not in any code blocks)
+- Local variables/constants takes precedence over global variables/constants
+- Better not to declare global variables/constants
+
+### Let vs Var
+
+- Let variables are only accessible inside the code block in which they are defined
+- Var scope is not limited to the code block in which they are defined, it's limited to the function in which it's defined
+- var => function-scoped
+- let, const => block-scoped
+- When using var to define a variable outside a function, it will create a global variable which is attached to the window object in the browser
+
+When a function is defined it is technically a global function, and it is attached to the window object.
+We can use modules to encapsulate and prevent functions from attaching to the window object.
+
+## This keyword
+
+The object that is executing the current function
+- If a function is a **method**(function) of an object, this references that **object itself**
+- If a function is a **regular function(not part of a object)** this references the **global object(window object in the browser and global object in node)**
+- If we call a function using the **new operator(constructor functions)**, this references to a **new empty object**
+
 ---
 
 1.Hoisting: Js compiler will move variable declarations and functions to the top

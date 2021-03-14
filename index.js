@@ -404,11 +404,149 @@ isNaN("Hello"); // returns true
 
 {
     console.log('Default parameters');
+
     function interest(principal, rate = 3.5, years = 5) {
         // rate = rate || 3.5;
         // years = years || 5;
         return principal * rate / 100 * years;
     }
 
-    console.log(interest(10000 ));
+    console.log(interest(10000));
+}
+
+{
+    console.log('Getters and Setters');
+
+    const person = {
+        firstName: 'Tanushka',
+        lastName: 'Bandara',
+        // fullName: function () {} // Old syntax
+        get fullName() {
+            return `Method: ${this.firstName} ${this.lastName}`;
+        },
+        set fullName(fullName) {
+            let names = fullName.split(' ');
+            this.firstName = names[0];
+            this.lastName = names[1];
+        }
+
+    };
+
+    console.log(`${person.firstName} ${person.lastName}`);
+    person.fullName = 'T B'; //setter
+    // console.log(person.fullName()); //without getter
+    console.log(person.fullName);
+    console.log(person);
+}
+
+{
+    console.log('Try and catch');
+
+    const person1 = {
+        firstName: 'Tanushka1',
+        lastName: 'Bandara1',
+        // fullName: function () {} // Old syntax
+        get fullName() {
+            return `Method: ${this.firstName} ${this.lastName}`;
+        },
+        set fullName(fullName) {
+            if (typeof fullName != 'string')
+                throw new Error('Full name is not a string');
+            let names = fullName.split(' ');
+            if (names.length !== 2)
+                throw new Error('Enter a valid name')
+            this.firstName = names[0];
+            this.lastName = names[1];
+        }
+
+    };
+
+    try {
+        person1.fullName = ''; //setter
+    } catch (e) {
+        console.error(e);
+    }
+    console.log(person1.fullName);
+}
+
+{
+    console.log('This keyword');
+
+    const video = {
+        title: 'a',
+        play() {
+            console.log(this); //video object
+        }
+    };
+
+    video.stop = function () {
+        console.log(this); //video object
+    }
+
+    video.stop();
+
+    function playVideo() {
+        console.log(this) //window object
+    }
+
+    playVideo();
+
+    function Video(title) {
+        this.title = title;
+        console.log(this); //new object
+    }
+
+    const v = new Video('b'); //'new' creates an empty object {} and sets 'this' to point to the empty object
+
+    const movie = {
+        title: 'a',
+        tags: ['a', 'b', 'c'],
+        showTags() {
+            this.tags.forEach(function (tag) { //the callback function is a regular function so it references the global object
+                console.log(1, this.title, tag);
+            }, this); //by adding 'this' as the 2nd parameter in the forEach it will reference to the movie object as we are not inside the callback function
+        },
+        //solution 1
+        showTags2() {
+            const self = this; //self refers to the movie object
+            this.tags.forEach(function (tag) {
+                console.log(2, self.title, tag); //self can be used to refer the movie object
+            });
+        },
+        //solution 2
+        showTags3() {
+            this.tags.forEach(function (tag) {
+                console.log(3, this.title, tag);
+            }.bind(this));
+        },
+
+        //solution 3
+        //best solution is to use arrow functions because they inherit the 'this' value from the containing function
+        //'this' is not rebound to a new object
+        showTags4() {
+            this.tags.forEach(tag => console.log(4, this.title, tag)
+            )
+        }
+    };
+
+    movie.showTags();
+    movie.showTags2();
+    movie.showTags3();
+    movie.showTags4();
+
+    console.log('Changing value of this');
+
+    function playMovie(a, b) {
+        console.log(this);
+    }
+
+    playMovie.call({name: 'c'}, 1, 2); //references the passed object
+    playMovie.apply({name: 'd'}, [1, 2]); //references the passed object, multiple arguments are passed in an array
+
+    //returns a new function and sets 'this' to point to the object passed permanently
+    // const fn = playMovie.bind({name: 'e'}); /
+    // fn();
+    playMovie.bind({name: 'e'})(); //similar to above fn(). By using () we are immediately invoking the function
+
+    playMovie(); //references the window object
 }
