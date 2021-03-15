@@ -573,7 +573,7 @@ If you give a parameter a default value, you have to give default values to all 
 
 ## Getters and Setters
 
-- getters => access properties
+- getters => access properties (Read only)
 - setters => change (mutate) properties
 - By using getters we can access object methods as a property without () => Object.method
 
