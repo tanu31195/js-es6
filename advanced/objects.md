@@ -7,16 +7,18 @@
 - Every object has a constructor property(it references to the function that was used to create the object)
 - If one or more methods(behavior) are in the object, object literal syntax is not a good way to create objects
 - When there are one or more methods in an object, the best way to create an object is factory or constructor functions
-- Functions are objects
 - Objects are not iterable
 
-### Object Literal Syntax { }
+## Creating Objects
+
+### 1. Object Literal Syntax { }
 
 - We use { } to define an object
 - We add key: value pairs to it
 - Properties are used to hold values
 - Functions/Methods are used to define some logic
 - Access the members using dot notation
+- Constructor property of circle is Object()
 
 
     const circle = {
@@ -35,7 +37,7 @@
     let x = {};
     //let x = new Object(); //JavaScript converts above line to this
 
-### Factory functions
+### 2. Factory functions
 
 - Produce object instances without diving into the complexities of classes, and the new keyword
 - It simply returns an object
@@ -55,7 +57,7 @@
     const circle1 = createCircle(1);
     circle1.draw();
 
-### Constructor functions
+### 3. Constructor functions
 
 - Pascal notation Circle()
 - Under the hood the **new** keyword will,
@@ -79,6 +81,24 @@ Other constructor examples, but we don't use
 - new String(); //'', "", ``
 - new Boolean(); //true, false
 - new Number(); //1,2,3
+
+## Functions are objects
+
+- Functions also have different members(properties and methods)
+- Constructor of a Function is Function()
+- When declaring a function internally it is represented as below
+
+
+    //
+    const Circle = new Function('radius', `
+      this.radius = radius;
+      this.draw = function () {
+      console.log('Draw circle');
+      }
+    `);
+
+    const circle1 = new Circle(1);
+
 
 ### Enumerating Properties of an Object
 
@@ -138,5 +158,5 @@ When checking for equality between objects reference is checked
 
 The object that is executing the current function
 - If a function is a **method**(function) of an object, this references that **object itself**
-- If a function is a **regular function(not part of a object)** this references the **global object(window object in the browser and global object in node)**
+- If a function is a **regular function(not part of an object)** this references the **global object(window object in the browser and global object in node)**
 - If we call a function using the **new operator(constructor functions)**, this references to a **new empty object**

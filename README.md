@@ -195,7 +195,9 @@ Iterate over properties of an object or elements in an array
 - A function that is a part of an object is called a method  
 - Objects are dynamic, we can add or delete new properties and methods  
 - const objects cannot be reassigned but can add/delete properties and change the object
-- Every object has a constructor(it references to the function that was used to create the object)
+- Every object has a constructor property(it references to the function that was used to create the object)
+- If one or more methods(behavior) are in the object, object literal syntax is not a good way to create objects
+- When there are one or more methods in an object, the best way to create an object is factory or constructor functions
 - Functions are objects
 - Objects are not iterable
 
@@ -204,8 +206,9 @@ Iterate over properties of an object or elements in an array
 - Produce object instances without diving into the complexities of classes, and the new keyword  
 - It simply returns an object
 - Camel Notation createCircle()
-- Constructor of circle1 is Object() this is an internal constructor function
+- Constructor property of circle1 is Object() this is an internal constructor function
 index.js:107
+
 
     function createCircle(radius) {
         return {
@@ -219,12 +222,12 @@ index.js:107
 
 ### Constructor functions
 
-Pascal notation Circle()  
-Under the hood the new keyword will,
+- Pascal notation Circle()  
+- Under the hood the **new** keyword will,
 - create an empty object
 - set this to point to the empty object
 - return the object
-- Constructor of circle object is Circle(radius) {...}
+- Constructor property of circle object is Circle(radius) {...}
 
 
     function Circle(radius) {
