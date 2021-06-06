@@ -1,9 +1,10 @@
-#OOP in JavaScript
+# OOP in JavaScript
 
 OOP is a programming paradigm centered around **objects** rather than functions  
 Combines group of related variables(properties) and functions(methods) into a unit called object
 
 Four pillars of OOP are,  
+
 1. Encapsulation
 2. Abstraction
 3. Inheritance

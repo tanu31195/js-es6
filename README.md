@@ -3,8 +3,10 @@
 Javascript > Programming Language
 ECMAScript > Specification
 
-Dynamically typed (not type safe)  
-Garbage collection done automatically
+Dynamically/weakly typed (not type safe)  
+Object Oriented  
+Garbage collection done automatically  
+Versatile Language runs in different platforms  
 
 JavaScript Engines  
 FireFox: SpiderMonkey  
@@ -164,7 +166,7 @@ Not equal !==
 1 | 2 // 3 = 00000011  
 1 & 2 // 0 = 00000000
 
-## Operator precedence 
+## Operator precedence
 
 <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence>
 
@@ -178,11 +180,13 @@ Not equal !==
 ### Loops
 
 Repeats action multiple times until condition is met
+
 - For `for (initialExpression; condition; incrementExpression;)`
 - While `initialExpression while(condition) {... incrementExpression}`
 - Do...while `initialExpression do{... incrementExpression} while(condition)` do block is executed at least once
 
 Iterate over properties of an object or elements in an array
+
 - For...in `for (let key in object) console.log(key, object[key])` Used for objects but can be used for arrays as well
 - For...of `for (let element of array)` (color of colors)
 
@@ -254,7 +258,7 @@ To check if a given property is in an object `if ('radius' in circle)`
     for (let key in circle)
     another[key] = circle[key]; // another['radius'] = circle['key'];
 
-#### Object.assign 
+#### Object.assign
 
 will take a target object(can be an empty object or an existing object) as the first argument 
 and will take one or more source objects.  
@@ -382,6 +386,8 @@ Default comma is used as separator
 
 ### Mapping arrays
 
+Mapping returns a new array
+
     const mapped1 = filtered.map(number => {
     return `<li>${number}</li>`;
     });
@@ -392,8 +398,8 @@ Default comma is used as separator
 - Reduce method have 2 arguments  
 - 1st is a callback function  
 - 2nd is the initial value of the accumulator  
-- If we don't initialize the accumulator it will take the 
-  1st element as accumulator and the 
+- If we don't initialize the accumulator it will take the
+  1st element as accumulator and the  
   2nd element as currentValue
 
 
@@ -466,7 +472,7 @@ When passing a function as a callback/predicate function, or an argument we can 
 
 ### Chaining of methods
 
-A new array is returned everytime, so we can chain the methods
+A new array is returned every time, so we can chain the methods
 
     const filtered1 = numbers
         .filter(number => number > 0)
@@ -556,11 +562,11 @@ Below will work due to hoisting the function declaration
 
 
     function multiply(multiplier, ...args) { //multiplier and REST of the parameters/arguments
-        console.log(args);
+        console.log(args); //[2, 3, 4, 5, 10]
         const total = args.reduce((a, b) => a + b);
         return total * multiplier;
     }
-    console.log(multiply(1, 2, 3, 4, 5, 10)); //25
+    console.log(multiply(1, 2, 3, 4, 5, 10)); //24
 
 ## Default Parameters
 

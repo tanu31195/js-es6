@@ -1,4 +1,4 @@
-## Objects
+# Objects
 
 - Purpose of an object is to group related variables and functions
 - A function that is a part of an object is called a method
@@ -153,6 +153,13 @@ Spreads an object(get all properties/methods) and put them into another object
     y = {value: 20}
 
 When checking for equality between objects reference is checked
+
+When an object is declared as const the contents of the object/array can be changed because the reference is same  
+
+`const hobbies = ['Sports', 'Cooking'];
+hobbies.push('Programming');`
+
+Above example shows hobbies contains the address of the object and it is not changed when we push a new element.
 
 ## This keyword
 
