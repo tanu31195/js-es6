@@ -24,6 +24,12 @@ Google : v8(Used in node)
 
 Use const if you don't want to reassign a variable
 
+In JavaScript, variables can hold two types of data: primitive types and reference types. The main difference between them is in how they are stored and passed around in memory.
+
+Primitive types, such as strings, numbers, booleans, null, and undefined, are stored directly in the variable's memory space. When you assign a new value to a primitive type variable, the old value is replaced with the new one.
+
+On the other hand, reference types, such as objects and arrays, are stored in memory as a reference to their location. When you assign a reference type to a variable, you are actually assigning a pointer to the object or array, rather than the value itself. This means that when you pass a reference type as an argument to a function or assign it to another variable, you are passing a reference to the same object or array, not a copy of it.
+
 ### Primitive/Value Types
 
 - String
