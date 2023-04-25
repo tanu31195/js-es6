@@ -39,6 +39,21 @@ Use const if you don't want to reassign a variable
 - Function
 - Array
 
+        let c = [1, 2]
+        let d = c
+        console. log(`c === d ${c === d`) //true
+        console. log(`c == d ${c == d}`) //true
+
+True because they point to the same memory address/reference 
+
+        let c = [1, 2]
+        let d = [1, 2]
+        console. log(`c === d ${c === d`) //false
+        console. log(`c == d ${c == d}`) //false
+
+d is a seperate memory address and when checked if equal it will be false
+Reference is passed not the value
+
 #### Objects
 
 let person = {
